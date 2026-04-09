@@ -21,9 +21,10 @@
   --gray: #818181;
   --white: #ffffff;
   --black: #111111;
+  --red: #cc2222;
   --navbar-h: 60px;
-  --ticker-h: 38px;
-  --header-total: 98px;
+  --ticker-h: 48px;
+  --header-total: 108px;
 }
 
 html { scroll-behavior: smooth; }
@@ -65,7 +66,7 @@ body {
   letter-spacing: 0.01em;
 }
 
-/* ── TICKER ── */
+/* ── TICKER — mais alto, fonte maior, itálico ── */
 .ticker-wrap {
   position: fixed;
   top: var(--navbar-h);
@@ -87,22 +88,23 @@ body {
 
 .ticker-item {
   font-family: 'Michroma', sans-serif;
-  font-size: 13px;
+  font-size: 16px;
+  font-style: italic;
   color: var(--white);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: lowercase;
-  padding: 0 24px;
+  padding: 0 28px;
   line-height: 1;
 }
 
-.ticker-sep { color: rgba(255,255,255,0.3); }
+.ticker-sep { color: rgba(255,255,255,0.3); font-style: normal; }
 
 @keyframes ticker {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
-/* ── HERO DESKTOP ── */
+/* ── HERO ── */
 .hero {
   padding-top: var(--header-total);
   position: relative;
@@ -152,9 +154,10 @@ body {
   flex-shrink: 0;
 }
 
+/* Hero title: 2 linhas fixas */
 .hero-title {
   font-family: 'Microgramma', sans-serif;
-  font-size: clamp(32px, 7.2vw, 102px);
+  font-size: clamp(36px, 7.5vw, 108px);
   line-height: 0.94;
   letter-spacing: -0.02em;
   color: var(--black);
@@ -162,14 +165,28 @@ body {
   margin-bottom: 32px;
 }
 
+/* Descrição: linha 1 em destaque, resto normal */
 .hero-desc {
   font-family: 'Michroma', sans-serif;
-  font-size: clamp(13px, 1.6vw, 18px);
   font-style: italic;
   color: var(--black);
   line-height: 1.8;
-  max-width: 620px;
+  max-width: 640px;
   margin-bottom: 28px;
+}
+
+.hero-desc-line1 {
+  font-size: clamp(16px, 2vw, 22px);
+  display: block;
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
+}
+
+.hero-desc-line2 {
+  font-size: clamp(13px, 1.4vw, 16px);
+  display: block;
+  letter-spacing: 0em;
+  opacity: 0.85;
 }
 
 .hero-bullets {
@@ -276,6 +293,7 @@ body {
   border-bottom: 1.5px solid rgba(0,0,0,0.15);
   padding: 18px 0;
   gap: 16px;
+  position: relative;
 }
 
 .field-label {
@@ -305,8 +323,26 @@ body {
   font-style: italic;
 }
 
+.field-input.error {
+  border-bottom: 1.5px solid var(--red);
+}
+
+.field-error {
+  font-family: 'Michroma', sans-serif;
+  font-size: 9px;
+  color: var(--red);
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+  display: none;
+  position: absolute;
+  bottom: -16px;
+  left: 126px;
+}
+
+.field-error.show { display: block; }
+
 .submit-row {
-  margin-top: 40px;
+  margin-top: 48px;
   display: flex;
   align-items: center;
   gap: 24px;
@@ -328,6 +364,7 @@ body {
 
 .submit-btn:hover { background: var(--white); color: var(--black); }
 .submit-btn:active { transform: scale(0.98); }
+.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .submit-note {
   font-family: 'Michroma', sans-serif;
@@ -386,58 +423,37 @@ footer {
   line-height: 1.9;
 }
 
-/* ────────────────────────────
-   MOBILE ≤ 600px
-──────────────────────────── */
+/* ── MOBILE ≤ 600px ── */
 @media (max-width: 600px) {
   :root {
     --navbar-h: 52px;
-    --ticker-h: 34px;
-    --header-total: 86px;
+    --ticker-h: 42px;
+    --header-total: 94px;
   }
 
   .navbar { padding: 0 20px; }
   .nav-logo { font-size: 18px; }
   .nav-drop { font-size: 12px; }
-  .ticker-item { font-size: 11px; padding: 0 16px; }
+  .ticker-item { font-size: 14px; padding: 0 20px; }
 
-  /* Hero ocupa pelo menos a tela toda */
   .hero { min-height: 100svh; }
+  .hero-inner { padding: 20px 20px 28px; justify-content: flex-end; }
 
-  /* Sem padding-top excessivo — texto gruda na parte de baixo */
-  .hero-inner {
-    padding: 20px 20px 28px;
-    justify-content: flex-end;
-  }
-
-  .hero-eyebrow {
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    margin-bottom: 16px;
-  }
+  .hero-eyebrow { font-size: 10px; letter-spacing: 0.1em; margin-bottom: 16px; }
   .hero-eyebrow::before { width: 20px; }
 
-  /* Título maior no mobile */
   .hero-title {
     font-size: clamp(36px, 10vw, 52px);
     line-height: 0.95;
     margin-bottom: 20px;
   }
 
-  /* Descrição maior e mais legível */
-  .hero-desc {
-    font-size: 15px;
-    line-height: 1.75;
-    max-width: 100%;
-    margin-bottom: 20px;
-  }
+  .hero-desc-line1 { font-size: 15px; }
+  .hero-desc-line2 { font-size: 13px; }
+  .hero-desc { max-width: 100%; margin-bottom: 20px; }
 
-  /* Bullets maiores */
   .hero-bullets { gap: 10px; }
-  .hero-bullets li {
-    font-size: 15px;
-    letter-spacing: 0.05em;
-  }
+  .hero-bullets li { font-size: 14px; letter-spacing: 0.05em; }
   .hero-bullets li::before { font-size: 20px; }
 
   /* Stats: 3 colunas lado a lado */
@@ -447,33 +463,22 @@ footer {
   .stat-num { font-size: clamp(24px, 8vw, 36px); }
   .stat-label { font-size: 8px; letter-spacing: 0.02em; }
 
-  /* Form */
   .form-section { padding: 44px 20px 56px; }
 
-  .field-wrap {
-    grid-template-columns: 1fr;
-    gap: 4px;
-    padding: 16px 0;
-  }
-
+  .field-wrap { grid-template-columns: 1fr; gap: 4px; padding: 16px 0; }
   .field-label { padding-bottom: 2px; }
   .field-input { font-size: 16px; }
+  .field-error { left: 0; }
 
   .submit-btn { width: 100%; padding: 16px 24px; }
-  .submit-row { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .submit-row { flex-direction: column; align-items: flex-start; gap: 14px; margin-top: 40px; }
 
-  footer {
-    padding: 18px 20px;
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-  }
+  footer { padding: 18px 20px; flex-direction: column; gap: 10px; text-align: center; }
   .footer-right { text-align: center; }
 }
 
 @media (max-width: 360px) {
   .hero-title { font-size: 32px; }
-  .hero-desc { font-size: 13px; }
   .stat-num { font-size: 22px; }
 }
 </style>
@@ -511,17 +516,18 @@ footer {
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-
   <div class="hero-inner">
     <div class="hero-eyebrow">LISTA VIP &nbsp;-&nbsp; #DROP 1</div>
 
     <h1 class="hero-title">
       TODA CICATRIZ<br>
-      É HISTÓRIA +<br>
-      PRESENÇA.
+      É UMA HISTÓRIA
     </h1>
 
-    <p class="hero-desc">+Estilo, +Estética e +Funcionalidade, pensado pro seu universo, faça parte da lista tenha Acesso Antecipado a pré venda, Preço Exclusivo, Envio Grátis e mais.</p>
+    <p class="hero-desc">
+      <span class="hero-desc-line1">+Estilo, +Estética e +Funcionalidade</span>
+      <span class="hero-desc-line2">Construído pro seu dia-a-dia real, faça parte da Lista VIP e tenha acesso a um preço exclusivo de apoiador, envio grátis, acesso antecipado a pré-venda e mais.</span>
+    </p>
 
     <ul class="hero-bullets">
       <li>PREÇO EXCLUSIVO</li>
@@ -553,22 +559,28 @@ footer {
     <p class="form-desc">Entre na Lista VIP. Tempo Limitado.</p>
 
     <form class="form-fields" id="vip-form" onsubmit="handleSubmit(event)" novalidate>
+
       <div class="field-wrap">
         <label class="field-label" for="f-name">Nome</label>
-        <input class="field-input" id="f-name" type="text" placeholder="seu nome completo" required autocomplete="off">
+        <input class="field-input" id="f-name" type="text" placeholder="seu nome completo" autocomplete="off">
+        <span class="field-error" id="err-name">Nome obrigatório</span>
       </div>
+
       <div class="field-wrap">
         <label class="field-label" for="f-wpp">Whatsapp</label>
-        <input class="field-input" id="f-wpp" type="tel" placeholder="(11) 99999-9999" required autocomplete="off" inputmode="numeric">
+        <input class="field-input" id="f-wpp" type="tel" placeholder="(11) 99999-9999" autocomplete="off" inputmode="numeric">
+        <span class="field-error" id="err-wpp">Número inválido</span>
       </div>
+
       <div class="field-wrap">
         <label class="field-label" for="f-email">Email</label>
-        <input class="field-input" id="f-email" type="email" placeholder="seu@email.com" required autocomplete="off">
+        <input class="field-input" id="f-email" type="email" placeholder="seu@email.com" autocomplete="off">
+        <span class="field-error" id="err-email">Email inválido</span>
       </div>
 
       <div class="submit-row">
         <button type="submit" class="submit-btn" id="submit-btn">CADASTRAR</button>
-        <p class="submit-note">Sem Spam. Apenas o que foi prometido.</p>
+        <p class="submit-note">sem spam. apenas o prometido.</p>
       </div>
     </form>
   </div>
@@ -577,7 +589,7 @@ footer {
     <div class="success-title">VOCÊ ESTÁ<br>DENTRO.</div>
     <p class="success-sub">
       cadastro confirmado.<br>
-      você recebe acesso vip 1 semana antes do drop.<br>
+      você recebe acesso vip antes do drop.<br>
       sickatriss — #drop 1
     </p>
   </div>
@@ -593,54 +605,108 @@ footer {
 </footer>
 
 <script>
+const WEBHOOK = 'https://hook.us2.make.com/6v6oh7kt7uexed02y4riz667upvtssbe';
+
+/* ── Dias mascarados ── */
 function updateDays() {
   const target = new Date('2025-05-08T00:00:00');
   const diff = target - new Date();
   const el = document.getElementById('days-count');
   if (!el) return;
   const days = diff <= 0 ? 0 : Math.ceil(diff / 86400000);
-  const masked = '*'.repeat(String(days).length);
-  el.textContent = masked;
+  el.textContent = '*'.repeat(String(days).length);
 }
 updateDays();
 setInterval(updateDays, 3600000);
 
+/* ── Máscara WhatsApp ── */
 document.getElementById('f-wpp').addEventListener('input', function(e) {
   let v = e.target.value.replace(/\D/g,'').slice(0,11);
   if (v.length > 6)      v = '('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);
   else if (v.length > 2) v = '('+v.slice(0,2)+') '+v.slice(2);
   else if (v.length)     v = '('+v;
   e.target.value = v;
+  clearErr('f-wpp','err-wpp');
 });
 
-function handleSubmit(e) {
+document.getElementById('f-name').addEventListener('input', function() { clearErr('f-name','err-name'); });
+document.getElementById('f-email').addEventListener('input', function() { clearErr('f-email','err-email'); });
+
+function clearErr(inputId, errId) {
+  document.getElementById(inputId).classList.remove('error');
+  document.getElementById(errId).classList.remove('show');
+}
+
+/* ── Validações ── */
+function validarNome(v) { return v.trim().length >= 2; }
+
+function validarEmail(v) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
+}
+
+function validarWpp(v) {
+  const digits = v.replace(/\D/g,'');
+  if (digits.length < 10 || digits.length > 11) return false;
+  const ddd = parseInt(digits.slice(0,2));
+  if (ddd < 11 || ddd > 99) return false;
+  if (digits.length === 11 && digits[2] !== '9') return false;
+  return true;
+}
+
+/* ── Submit com Make webhook ── */
+async function handleSubmit(e) {
   e.preventDefault();
-  const name  = document.getElementById('f-name').value.trim();
-  const wpp   = document.getElementById('f-wpp').value.trim();
-  const email = document.getElementById('f-email').value.trim();
-  if (!name || !wpp || !email) return;
+
+  const name  = document.getElementById('f-name').value;
+  const wpp   = document.getElementById('f-wpp').value;
+  const email = document.getElementById('f-email').value;
+
+  let valid = true;
+
+  if (!validarNome(name)) {
+    document.getElementById('f-name').classList.add('error');
+    document.getElementById('err-name').classList.add('show');
+    valid = false;
+  }
+  if (!validarWpp(wpp)) {
+    document.getElementById('f-wpp').classList.add('error');
+    document.getElementById('err-wpp').classList.add('show');
+    valid = false;
+  }
+  if (!validarEmail(email)) {
+    document.getElementById('f-email').classList.add('error');
+    document.getElementById('err-email').classList.add('show');
+    valid = false;
+  }
+  if (!valid) return;
 
   const btn = document.getElementById('submit-btn');
   btn.textContent = 'ENVIANDO...';
   btn.disabled = true;
 
-  const payload = { name, whatsapp: wpp, email, ts: new Date().toISOString() };
+  const payload = {
+    name:      name.trim(),
+    whatsapp:  wpp.trim(),
+    email:     email.trim(),
+    source:    'landing-vip',
+    ts:        new Date().toISOString()
+  };
 
-  // ── INTEGRAÇÃO ──────────────────────────────────────────────────
-  // fetch('https://hook.us2.make.com/6v6oh7kt7uexed02y4riz667upvtssbe', {
-  //   method: 'POST',
-  //   headers: {'Content-Type':'application/json'},
-  //   body: JSON.stringify(payload)
-  // });
-  // ────────────────────────────────────────────────────────────────
-  console.log('Lead VIP:', payload);
+  try {
+    await fetch(WEBHOOK, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload)
+    });
+  } catch (err) {
+    console.error('Webhook error:', err);
+  }
 
-  setTimeout(() => {
-    document.getElementById('form-block').style.display = 'none';
-    document.getElementById('success-block').classList.add('show');
-  }, 800);
+  document.getElementById('form-block').style.display = 'none';
+  document.getElementById('success-block').classList.add('show');
 }
 
+/* ── Parallax desktop ── */
 if (window.innerWidth > 600) {
   window.addEventListener('scroll', function() {
     const bg = document.querySelector('.hero-bg');
